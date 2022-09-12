@@ -21,6 +21,12 @@ public class EmployeeDTO {
         this.address = address;
     }
 
+    public EmployeeDTO(String name, String address, long salary) {
+        this.name = name;
+        this.address = address;
+        this.salary = salary;
+    }
+
     public static List<EmployeeDTO> getEmployeeDtos(List<Employee> employees) {
         List<EmployeeDTO> employeedtos = new ArrayList();
         employees.forEach(employee -> employeedtos.add(new EmployeeDTO(employee)));

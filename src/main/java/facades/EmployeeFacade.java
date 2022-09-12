@@ -89,7 +89,7 @@ public class EmployeeFacade {
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         EmployeeFacade ef = getEmployeeFacade(emf);
-        System.out.println(ef.getEmployeesWithHighestSalaryFromTop());
+        System.out.println(ef.getEmployeeByName("Mark"));
 
 //        ef.getAllEmployees().forEach(dto->System.out.println(dto));
     }
