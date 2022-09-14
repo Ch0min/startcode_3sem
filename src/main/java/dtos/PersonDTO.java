@@ -5,6 +5,7 @@
  */
 package dtos;
 
+import entities.Movie;
 import entities.Person;
 import entities.RenameMe;
 
@@ -20,6 +21,12 @@ public class PersonDTO {
     private int age;
 
     public PersonDTO(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public PersonDTO(long id, String name, int age) {
+        this.id = id;
         this.name = name;
         this.age = age;
     }

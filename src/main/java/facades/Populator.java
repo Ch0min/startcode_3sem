@@ -6,9 +6,11 @@
 package facades;
 
 import dtos.EmployeeDTO;
+import dtos.MovieDTO;
 import dtos.PersonDTO;
 import dtos.RenameMeDTO;
 import entities.Employee;
+import entities.Movie;
 import entities.Person;
 import entities.RenameMe;
 import javax.persistence.EntityManagerFactory;
@@ -26,14 +28,21 @@ public class Populator {
 //        pf.create(new PersonDTO(new Person("Hanne", 21)));
 //        pf.create(new PersonDTO(new Person("Hassan", 3)));
 
-        EmployeeFacade ef = EmployeeFacade.getEmployeeFacade(emf);
-        ef.create(new EmployeeDTO(new Employee("Mark", "Zinniavej 10", 10000)));
-        ef.create(new EmployeeDTO(new Employee("Nick", "Lufthavnsparken 7", 500)));
-        ef.create(new EmployeeDTO(new Employee("Cecilie", "Julius Andersensvej 4", 40000)));
-        ef.create(new EmployeeDTO(new Employee("Fido", "Haven 7", 100)));
+//        EmployeeFacade ef = EmployeeFacade.getEmployeeFacade(emf);
+//        ef.create(new EmployeeDTO(new Employee("Mark", "Zinniavej 10", 10000)));
+//        ef.create(new EmployeeDTO(new Employee("Nick", "Lufthavnsparken 7", 500)));
+//        ef.create(new EmployeeDTO(new Employee("Cecilie", "Julius Andersensvej 4", 40000)));
+//        ef.create(new EmployeeDTO(new Employee("Fido", "Haven 7", 100)));
+
+        MovieFacade mf = MovieFacade.getMovieFacade(emf);
+        mf.createMovie(new MovieDTO(new Movie(2014, "Edge of Tomorrow")));
+        mf.createMovie(new MovieDTO(new Movie(2011, "Source Code")));
+        mf.createMovie(new MovieDTO(new Movie(2010, "Inception")));
+
+
 
     }
-    
+
     public static void main(String[] args) {
         populate();
     }
