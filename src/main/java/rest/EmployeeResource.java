@@ -2,8 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import facades.EmployeeFacade;
-import facades.PersonFacade;
+import datafacades.EmployeeFacade;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManagerFactory;

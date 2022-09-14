@@ -1,9 +1,7 @@
-package facades;
+package datafacades;
 
 import dtos.EmployeeDTO;
-import dtos.PersonDTO;
 import entities.Employee;
-import entities.Person;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;

@@ -1,5 +1,5 @@
 ### Get All Movies
-GET http://localhost:8080/devops_starter_war_exploded/api/movie/all
+GET http://localhost:8080/devops_starter_war_exploded/api/movie/
 Accept: application/json
 
 ### Get Movie

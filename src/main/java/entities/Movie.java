@@ -1,5 +1,7 @@
 package entities;
 
+import dtos.MovieDTO;
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
@@ -15,8 +17,12 @@ public class Movie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+
+    @Column(name = "year")
     private int year;
+
+    @Column(name = "title")
     private String title;
 
     public Movie() {
@@ -27,22 +33,18 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public Movie(Long id, int year, String title) {
+    public Movie(int id, int year, String title) {
         this.id = id;
         this.year = year;
         this.title = title;
     }
 
-    public Movie(Movie movieEntity) {
 
-
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -74,13 +76,13 @@ public class Movie implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Movie)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return getId().equals(movie.getId());
+        return id == movie.id && year == movie.year && Objects.equals(title, movie.title) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id, year, title);
     }
 }

@@ -3,16 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package facades;
+package datafacades;
 
-import dtos.EmployeeDTO;
-import dtos.MovieDTO;
-import dtos.PersonDTO;
-import dtos.RenameMeDTO;
-import entities.Employee;
 import entities.Movie;
-import entities.Person;
-import entities.RenameMe;
+
 import javax.persistence.EntityManagerFactory;
 import utils.EMF_Creator;
 
@@ -35,9 +29,9 @@ public class Populator {
 //        ef.create(new EmployeeDTO(new Employee("Fido", "Haven 7", 100)));
 
         MovieFacade mf = MovieFacade.getMovieFacade(emf);
-        mf.createMovie(new MovieDTO(new Movie(2014, "Edge of Tomorrow")));
-        mf.createMovie(new MovieDTO(new Movie(2011, "Source Code")));
-        mf.createMovie(new MovieDTO(new Movie(2010, "Inception")));
+        mf.create(new Movie(2014, "Edge of Tomorrow"));
+        mf.create(new Movie(2011, "Source Code"));
+        mf.create(new Movie(2010, "Inception"));
 
 
 

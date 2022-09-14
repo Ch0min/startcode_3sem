@@ -11,12 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Provider
-public class MovieNotFoundExceptionMapper implements ExceptionMapper<MovieNotFoundException> {
+public class EntityNotFoundExceptionMapper implements ExceptionMapper<EntityNotFoundException> {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
-    public Response toResponse(MovieNotFoundException ex) {
-        Logger.getLogger(MovieNotFoundExceptionMapper.class.getName())
+    public Response toResponse(EntityNotFoundException ex) {
+        Logger.getLogger(EntityNotFoundExceptionMapper.class.getName())
                 .log(Level.SEVERE, null, ex);
         ExceptionDTO err = new ExceptionDTO(404, ex.getMessage());
         return Response

@@ -1,9 +1,7 @@
-package facades;
+package datafacades;
 
-import dtos.MovieDTO;
-import dtos.PersonDTO;
 import entities.Movie;
-import errorhandling.MovieNotFoundException;
+import errorhandling.EntityNotFoundException;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 
@@ -59,61 +57,49 @@ public class MovieFacadeTest {
     }
 
     @Test
-    void testGetMovieByID() throws MovieNotFoundException {
-        String expected = "Edge of Tomorrow";
-        String actual = facade.getMovie(1).getTitle();
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    void updateMovie() throws MovieNotFoundException {
-        System.out.println("Testing updateMovie(MovieDTO m)");
-        facade.updateMovie(new MovieDTO(2, 2011, "Source CodeCODE"));
-        String actual = facade.getMovie(2).getTitle();
-        String expected = "Source CodeCODE";
+    void create() {
+        System.out.println("Testing create(Movie m)");
+        Movie m = new Movie(2000,"TestMovie");
+        m.setId(4);
+        Movie expected = m;
+        Movie actual = facade.create(m);
         assertEquals(expected, actual);
     }
 
+    @Test
+    void getById() throws EntityNotFoundException {
+        System.out.println("Testing getById(id)");
+        Movie expected = m1;
+        Movie actual = facade.getById(m1.getId());
+        assertEquals(expected, actual);
+    }
 
     @Test
-    void testGetAllMovies() {
+    void getAll() {
+        System.out.println("Testing getAll()");
         int expected = 3;
-        int actual = facade.getAllMovies().size();
+        int actual = facade.getAll().size();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void update() throws EntityNotFoundException {
+        System.out.println("Testing Update(Movie m)");
+        m2.setYear(1900);
+        Movie expected = m2;
+        Movie actual = facade.update(m2);
         assertEquals(expected, actual);
     }
 
-
-//    @Test
-//    void testCreateMovie() {
-//        System.out.println("Testing createMovie(MovieDTO movieDTO)");
-//        MovieDTO m = new MovieDTO(2000, "TestMovie");
-//        MovieDTO expected = m;
-//        MovieDTO actual = facade.createMovie(m);;
-//        assertEquals(expected, actual);
-
-
-        // Lærer eksempel
-//        MovieDTO m = new MovieDTO(2000, "TestMovie");
-//        MovieDTO expected = m;
-//        MovieDTO actual = facade.createMovie(m);
-//        assertEquals(expected, actual);
-
-//    }
-
-
     @Test
-    void deleteMovie() throws MovieNotFoundException {
-        System.out.println("Testing deleteMovie(id)");
-        Movie m = facade.deleteMovie(m1.getId());
+    void delete() throws EntityNotFoundException {
+        System.out.println("Testing delete(id)");
+        Movie m = facade.delete(m1.getId());
         int expected = 2;
-        int actual = facade.getAllMovies().size();
+        int actual = facade.getAll().size();
         assertEquals(expected, actual);
         assertEquals(m, m1);
-
     }
-
-
 
 }
 

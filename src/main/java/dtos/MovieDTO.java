@@ -11,48 +11,37 @@ import entities.Person;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-/**
- * @author tha
- */
+
 public class MovieDTO {
-    private Long id;
+    private int id;
     private int year;
     private String title;
 
-    public MovieDTO() {
-    }
-
-    public MovieDTO(int year, String title) {
-        this.year = year;
-        this.title = title;
-    }
-
-    public MovieDTO(long id, int year, String title) {
-        this.id = id;
-        this.year = year;
-        this.title = title;
-    }
-
     public MovieDTO(Movie m) {
-        if (m.getId() != null)
+        if (m.getId() != 0)
             this.id = m.getId();
         this.year = m.getYear();
         this.title = m.getTitle();
-
     }
 
-    public static List<MovieDTO> getDTOS(List<Movie> movies) {
-        List<MovieDTO> movieDTOS = new ArrayList();
-        movies.forEach(movie -> movieDTOS.add(new MovieDTO(movie)));
-        return movieDTOS;
+    public static List<MovieDTO> toList(List<Movie> movies) {
+        return movies.stream().map(MovieDTO::new).collect(Collectors.toList());
     }
 
-    public Long getId() {
+    public Movie getEntity(){
+        Movie m = new Movie(this.year, this.title);
+        if(id != 0)
+            m.setId(this.id);
+        return m;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -84,14 +73,14 @@ public class MovieDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MovieDTO)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         MovieDTO movieDTO = (MovieDTO) o;
-        return getId().equals(movieDTO.getId());
+        return id == movieDTO.id && year == movieDTO.year && Objects.equals(title, movieDTO.title) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id, year, title);
     }
 
 }
