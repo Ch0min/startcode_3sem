@@ -1,0 +1,24 @@
+### Get All Persons
+GET http://localhost:8080/rest_exercises_war_exploded/api/person/
+Accept: application/json
+
+### Get Person
+GET http://localhost:8080/rest_exercises_war_exploded/api/person/7
+Accept: application/json
+
+### Create Person
+POST http://localhost:8080/rest_exercises_war_exploded/api/person
+Content-Type: application/json
+
+{"created": null, "fname": "Perle", "lastEdited": null, "lname": "Lele", "phone": "00110011"}
+
+### Update Person
+PUT http://localhost:8080/rest_exercises_war_exploded/api/person/9
+Content-Type: application/json
+
+{"created": null, "fname": "Mark", "lastEdited": null, "lname": "Lundgaard", "phone": "29842712"}
+
+### Delete Person
+DELETE http://localhost:8080/rest_exercises_war_exploded/api/person/19
+Content-Type: application/json
+

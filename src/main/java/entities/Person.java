@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,54 +17,95 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private int age;
+    private int id;
+    private String fname;
+    private String lname;
+    private String phone;
+    private Date created;   // LocalDate virker
+    private Date lastEdited;
 
     public Person() {
     }
 
-    public Person(Long id, String name, int age) {
+    public Person(int id, String fname, String lname, String phone) {
         this.id = id;
-        this.name = name;
-        this.age = age;
+        this.fname = fname;
+        this.lname = lname;
+        this.phone = phone;
     }
 
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public Person(String fname, String lname, String phone) {
+        this.fname = fname;
+        this.lname = lname;
+        this.phone = phone;
     }
 
-    public Long getId() {
+    public Person(int id, String fname, String lname, String phone, Date created, Date lastEdited) {
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
+        this.phone = phone;
+        this.created = created;
+        this.lastEdited = lastEdited;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFname() {
+        return fname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public int getAge() {
-        return age;
+    public String getLname() {
+        return lname;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastEdited() {
+        return lastEdited;
+    }
+
+    public void setLastEdited(Date lastEdited) {
+        this.lastEdited = lastEdited;
     }
 
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", created=" + created +
+                ", lastEdited=" + lastEdited +
                 '}';
     }
 
@@ -72,7 +114,7 @@ public class Person implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return getId().equals(person.getId());
+        return getId() == person.getId();
     }
 
     @Override

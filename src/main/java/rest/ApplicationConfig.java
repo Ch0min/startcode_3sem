@@ -20,10 +20,12 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(errorhandling.EntityNotFoundExceptionMapper.class);
+        resources.add(errorhandling.PersonNotFoundExceptionMapper.class);
         resources.add(errorhandling.GenericExceptionMapper.class);
+        resources.add(org.glassfish.jersey.jsonb.internal.JsonBindingProvider.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
-//        resources.add(PersonResource.class);
-        resources.add(EmployeeResource.class);
+        resources.add(rest.PersonResource.class);
     }
     
 }

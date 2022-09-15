@@ -1,41 +1,77 @@
 package rest;
 
+import businessfacades.PersonDTOFacade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import utils.EMF_Creator;
-import facades.PersonFacade;
-import javax.persistence.EntityManagerFactory;
+import dtos.PersonDTO;
+import errorhandling.EntityNotFoundException;
+import datafacades.IDataFacade;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//Todo Remove or change relevant parts before ACTUAL use
-//@Path("person")
-//public class PersonResource {
-//
-//    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-//    private static final PersonFacade FACADE =  PersonFacade.getPersonFacade(EMF);
-//    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-//
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public String demo() {
-//        return "{\"msg\":\"Hello World\"}";
-//    }
-//
-//    @GET
-//    @Path("/all")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response getAllPersons() {
-//        return Response.ok().entity(GSON.toJson(FACADE.getAll())).build();
-//    }
+@Path("person")
+public class PersonResource {
 
-//    @POST
-//    @Produces({MediaType.APPLICATION_JSON})
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    public Response postExample(String input){
-////        RenameMeDTO rmdto = GSON.fromJson(input, RenameMeDTO.class);
-////        System.out.println(rmdto);
-//        return Response.ok().entity().build();
-//    }
-//}
+    private static final IDataFacade<PersonDTO> FACADE =  PersonDTOFacade.getFacade();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllPersons() {
+        return Response.ok().entity(GSON.toJson(FACADE.getAll())).build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getPersonById(@PathParam("id") int id) throws EntityNotFoundException {
+        return Response.ok().entity(GSON.toJson(FACADE.getById(id))).build();
+    }
+
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response createPerson(String content) {
+        PersonDTO pdto = GSON.fromJson(content, PersonDTO.class);
+        PersonDTO newPdto = FACADE.create(pdto);
+        return Response.ok().entity(GSON.toJson(newPdto)).build();
+    }
+
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("{id}")
+    public Response updatePerson(@PathParam("id") int id, String personInput) throws EntityNotFoundException {
+        PersonDTO personDTO = GSON.fromJson(personInput, PersonDTO.class);
+        personDTO.setId(id);
+        PersonDTO returned = FACADE.update(personDTO);
+        return Response.ok().entity(GSON.toJson(returned)).build();
+    }
+
+    @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("{id}")
+    public Response deletePerson(@PathParam("id") int id) throws EntityNotFoundException {
+        PersonDTO deleted = FACADE.delete(id);
+        return Response.ok().entity(GSON.toJson(deleted)).build();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
