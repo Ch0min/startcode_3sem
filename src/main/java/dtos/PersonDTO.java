@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-
+/**
+ * @author tha
+ */
 public class PersonDTO {
     private int id;
     private String fname;

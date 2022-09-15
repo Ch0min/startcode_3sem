@@ -26,11 +26,10 @@ public class Populator {
 //        pf.create(new Address("Testvej 1", "Test", "0101"));
 
         // Assign address to Person
-//        Person p1 = pf.assignAddressToPerson(3, 2);
-//        Person p2 = pf.assignAddressToPerson(2, 3);
+//        Person p1 = pf.assignAddressToPerson(2, 4);
 
         // Delete Person aswell as its Address
-//        Person p1 = pf.delete(3);
+        Person p1 = pf.delete(4);
 
 
 

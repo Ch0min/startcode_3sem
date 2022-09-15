@@ -45,15 +45,10 @@ public class Person implements Serializable {
         this.lname = lname;
         this.phone = phone;
         this.address = address;
+
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     public int getId() {
         return id;
@@ -103,6 +98,14 @@ public class Person implements Serializable {
         this.lastEdited = lastEdited;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -112,7 +115,6 @@ public class Person implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", created=" + created +
                 ", lastEdited=" + lastEdited +
-                ", address=" + address +
                 '}';
     }
 

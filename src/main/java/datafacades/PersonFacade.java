@@ -115,6 +115,7 @@ public class PersonFacade implements IDataFacade<Person> {
         em.getTransaction().commit();
         em.close();
         return person;
+
     }
 
     public static void main(String[] args) throws PersonNotFoundException {
