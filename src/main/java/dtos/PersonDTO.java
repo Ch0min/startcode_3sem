@@ -5,17 +5,15 @@
  */
 package dtos;
 
+import entities.Address;
 import entities.Person;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * @author tha
- */
+
 public class PersonDTO {
     private int id;
     private String fname;
@@ -23,6 +21,7 @@ public class PersonDTO {
     private String phone;
     private Date created;   // LocalDate virker
     private Date lastEdited;
+    private Address address;
 
     public PersonDTO(Person p) {
         if (p.getId() != 0)
@@ -30,6 +29,7 @@ public class PersonDTO {
         this.fname = p.getFname();
         this.lname = p.getLname();
         this.phone = p.getPhone();
+        this.address = p.getAddress();
     }
 
     public static List<PersonDTO> toList(List<Person> persons) {
@@ -41,6 +41,14 @@ public class PersonDTO {
         if(id != 0)
             p.setId(this.id);
         return p;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getId() {

@@ -3,11 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 
 @Entity
@@ -23,6 +19,10 @@ public class Person implements Serializable {
     private String phone;
     private Date created;   // LocalDate virker
     private Date lastEdited;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     public Person() {
     }
@@ -40,13 +40,19 @@ public class Person implements Serializable {
         this.phone = phone;
     }
 
-    public Person(int id, String fname, String lname, String phone, Date created, Date lastEdited) {
-        this.id = id;
+    public Person(String fname, String lname, String phone, Address address) {
         this.fname = fname;
         this.lname = lname;
         this.phone = phone;
-        this.created = created;
-        this.lastEdited = lastEdited;
+        this.address = address;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getId() {
@@ -106,6 +112,7 @@ public class Person implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", created=" + created +
                 ", lastEdited=" + lastEdited +
+                ", address=" + address +
                 '}';
     }
 

@@ -1,6 +1,6 @@
 package datafacades;
 
-import dtos.PersonDTO;
+import entities.Address;
 import entities.Person;
 
 import java.util.List;
@@ -91,6 +91,30 @@ public class PersonFacade implements IDataFacade<Person> {
         } finally {
             em.close();
         }
+    }
+
+    public Address create(Address address) {
+        Address addressEntity = new Address(address.getStreet(), address.getCity(), address.getZip());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(addressEntity);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return addressEntity;
+    }
+
+    public Person assignAddressToPerson(int addressId, int personId) {
+        EntityManager em = emf.createEntityManager();
+        Address address = em.find(Address.class, addressId);
+        Person person = em.find(Person.class, personId);
+        em.getTransaction().begin();
+        person.setAddress(address);
+        em.getTransaction().commit();
+        em.close();
+        return person;
     }
 
     public static void main(String[] args) throws PersonNotFoundException {
