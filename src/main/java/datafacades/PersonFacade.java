@@ -106,6 +106,7 @@ public class PersonFacade implements IDataFacade<Person> {
         return addressEntity;
     }
 
+/* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade */
     public Person assignAddressToPerson(int addressId, int personId) {
         EntityManager em = emf.createEntityManager();
         Address address = em.find(Address.class, addressId);
@@ -117,6 +118,7 @@ public class PersonFacade implements IDataFacade<Person> {
         return person;
 
     }
+
 
     public static void main(String[] args) throws PersonNotFoundException {
         emf = EMF_Creator.createEntityManagerFactory();

@@ -25,12 +25,17 @@ public class Populator {
 //        pf.create(new Address("Zinniavej 10", "Kastrup", "2770"));
 //        pf.create(new Address("Testvej 1", "Test", "0101"));
 
+
+/* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade  */
         // Assign address to Person
-//        Person p1 = pf.assignAddressToPerson(2, 4);
+//        Person p1 = pf.assignAddressToPerson(3, 3);
 
         // Delete Person aswell as its Address
-        Person p1 = pf.delete(4);
+//        Person p1 = pf.delete(3);
 
+
+
+/* ***     ONE TO MANY     *** */
 
 
 

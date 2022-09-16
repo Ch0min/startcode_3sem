@@ -31,7 +31,8 @@ public class PersonDTO {
         this.fname = p.getFname();
         this.lname = p.getLname();
         this.phone = p.getPhone();
-        this.address = p.getAddress();
+
+         this.address = p.getAddress();   /* ***     ONE TO ONE      *** */
     }
 
     public static List<PersonDTO> toList(List<Person> persons) {

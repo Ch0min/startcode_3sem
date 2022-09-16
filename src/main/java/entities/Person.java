@@ -20,10 +20,6 @@ public class Person implements Serializable {
     private Date created;   // LocalDate virker
     private Date lastEdited;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
-
     public Person() {
     }
 
@@ -40,12 +36,25 @@ public class Person implements Serializable {
         this.phone = phone;
     }
 
+
+/* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     public Person(String fname, String lname, String phone, Address address) {
         this.fname = fname;
         this.lname = lname;
         this.phone = phone;
         this.address = address;
+    }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
 
@@ -98,13 +107,6 @@ public class Person implements Serializable {
         this.lastEdited = lastEdited;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     @Override
     public String toString() {

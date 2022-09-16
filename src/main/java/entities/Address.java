@@ -2,7 +2,9 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 
 
@@ -18,9 +20,6 @@ public class Address implements Serializable {
     private String city;
     private String zip;
 
-    @OneToOne(mappedBy = "address", cascade = CascadeType.REMOVE)
-    private Person person;
-
     public Address() {
     }
 
@@ -29,6 +28,11 @@ public class Address implements Serializable {
         this.city = city;
         this.zip = zip;
     }
+
+    /* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade */
+    @OneToOne(mappedBy = "address", cascade = CascadeType.REMOVE)
+    private Person person;
+
 
     public Address(String street, String city, String zip, Person person) {
         this.street = street;
@@ -55,6 +59,15 @@ public class Address implements Serializable {
         }
         this.person = person;
     }
+
+        public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
 
     public int getId() {
         return id;
@@ -88,14 +101,6 @@ public class Address implements Serializable {
         this.zip = zip;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     @Override
     public String toString() {
         return "Address{" +
@@ -103,7 +108,6 @@ public class Address implements Serializable {
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", zip='" + zip + '\'' +
-                ", person=" + person +
                 '}';
     }
 
