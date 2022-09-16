@@ -28,10 +28,10 @@ public class Populator {
 
 /* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade  */
         // Assign address to Person
-//        Person p1 = pf.assignAddressToPerson(3, 3);
+//        Person p1 = pf.assignAddressToPerson(1, 1);
 
         // Delete Person aswell as its Address
-//        Person p1 = pf.delete(3);
+        Person p1 = pf.delete(1);
 
 
 

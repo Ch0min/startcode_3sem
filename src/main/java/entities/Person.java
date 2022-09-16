@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
@@ -46,6 +47,15 @@ public class Person implements Serializable {
         this.fname = fname;
         this.lname = lname;
         this.phone = phone;
+        this.address = address;
+    }
+
+    public Person(String fname, String lname, String phone, Date created, Date lastEdited, Address address) {
+        this.fname = fname;
+        this.lname = lname;
+        this.phone = phone;
+        this.created = created;
+        this.lastEdited = lastEdited;
         this.address = address;
     }
 

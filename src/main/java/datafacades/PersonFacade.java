@@ -3,6 +3,7 @@ package datafacades;
 import entities.Address;
 import entities.Person;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
