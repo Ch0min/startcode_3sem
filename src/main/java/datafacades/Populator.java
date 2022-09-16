@@ -5,42 +5,38 @@
  */
 package datafacades;
 
-import javax.persistence.EntityManagerFactory;
+import entities.Movie;
 
-import entities.Address;
-import entities.Person;
+import javax.persistence.EntityManagerFactory;
 import utils.EMF_Creator;
 
-
+/**
+ *
+ * @author tha
+ */
 public class Populator {
     public static void populate(){
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-        PersonFacade pf = PersonFacade.getPersonFacade(emf);
-//        pf.create(new Person("Mark", "Chomin", "29842712"));
-//        pf.create(new Person("Nick", "Lundgaard", "12345678"));
-//        pf.create(new Person("Cecilie", "Ravn", "8765431"));
-//        pf.create(new Person("Fido", "Lele", "54637218"));
+//        PersonFacade pf = PersonFacade.getPersonFacade(emf);
+//        pf.create(new PersonDTO(new Person("Hans", 43)));
+//        pf.create(new PersonDTO(new Person("Hanne", 21)));
+//        pf.create(new PersonDTO(new Person("Hassan", 3)));
 
-        // Create new address
-//        pf.create(new Address("Zinniavej 10", "Kastrup", "2770"));
-//        pf.create(new Address("Testvej 1", "Test", "0101"));
+//        EmployeeFacade ef = EmployeeFacade.getEmployeeFacade(emf);
+//        ef.create(new EmployeeDTO(new Employee("Mark", "Zinniavej 10", 10000)));
+//        ef.create(new EmployeeDTO(new Employee("Nick", "Lufthavnsparken 7", 500)));
+//        ef.create(new EmployeeDTO(new Employee("Cecilie", "Julius Andersensvej 4", 40000)));
+//        ef.create(new EmployeeDTO(new Employee("Fido", "Haven 7", 100)));
 
-
-/* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade  */
-        // Assign address to Person
-//        Person p1 = pf.assignAddressToPerson(1, 1);
-
-        // Delete Person aswell as its Address
-        Person p1 = pf.delete(1);
-
-
-
-/* ***     ONE TO MANY     *** */
+        MovieFacade mf = MovieFacade.getMovieFacade(emf);
+        mf.create(new Movie(2014, "Edge of Tomorrow"));
+        mf.create(new Movie(2011, "Source Code"));
+        mf.create(new Movie(2010, "Inception"));
 
 
 
     }
-    
+
     public static void main(String[] args) {
         populate();
     }

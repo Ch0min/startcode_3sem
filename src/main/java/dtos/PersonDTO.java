@@ -5,7 +5,11 @@
  */
 package dtos;
 
+<<<<<<< HEAD
 import entities.Address;
+=======
+import entities.Movie;
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
 import entities.Person;
 
 import java.util.Date;
@@ -35,8 +39,21 @@ public class PersonDTO {
          this.address = p.getAddress();   /* ***     ONE TO ONE      *** */
     }
 
+<<<<<<< HEAD
     public static List<PersonDTO> toList(List<Person> persons) {
         return persons.stream().map(PersonDTO::new).collect(Collectors.toList());
+=======
+    public PersonDTO(long id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public static List<PersonDTO> getDtos(List<Person> persons) {
+        List<PersonDTO> persondtos = new ArrayList();
+        persons.forEach(person -> persondtos.add(new PersonDTO(person)));
+        return persondtos;
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
     }
 
     public Person getEntity(){

@@ -1,5 +1,7 @@
 package rest;
 
+import errorhandling.EntityNotFoundException;
+
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
@@ -25,7 +27,14 @@ public class ApplicationConfig extends Application {
         resources.add(errorhandling.GenericExceptionMapper.class);
         resources.add(org.glassfish.jersey.jsonb.internal.JsonBindingProvider.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
+<<<<<<< HEAD
         resources.add(rest.PersonResource.class);
+=======
+        resources.add(rest.MovieResource.class);
+        resources.add(rest.EmployeeResource.class);
+        resources.add(rest.PersonResource.class);
+
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
     }
     
 }

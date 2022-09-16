@@ -1,16 +1,23 @@
 package rest;
 
+<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.PersonDTO;
 import entities.Person;
 import io.restassured.http.ContentType;
+=======
+import entities.RenameMe;
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
 import java.net.URI;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
@@ -18,24 +25,37 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+<<<<<<< HEAD
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+=======
+import static org.hamcrest.Matchers.equalTo;
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD
 
 //@Disabled
+=======
+//Uncomment the line below, to temporarily disable this test
+@Disabled
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
 public class PersonResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
+<<<<<<< HEAD
     private static Person p1, p2;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+=======
+    private static RenameMe r1, r2;
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -69,6 +89,7 @@ public class PersonResourceTest {
     }
 
     // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
+<<<<<<< HEAD
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
@@ -81,6 +102,19 @@ public class PersonResourceTest {
             em.persist(p1);
             em.persist(p2);
 
+=======
+    //TODO -- Make sure to change the EntityClass used below to use YOUR OWN (renamed) Entity class
+    @BeforeEach
+    public void setUp() {
+        EntityManager em = emf.createEntityManager();
+        r1 = new RenameMe("Some txt", "More text");
+        r2 = new RenameMe("aaa", "bbb");
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
+            em.persist(r1);
+            em.persist(r2);
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -90,6 +124,7 @@ public class PersonResourceTest {
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
+<<<<<<< HEAD
         given().when().get("/person").then().statusCode(200);
     }
 
@@ -194,5 +229,29 @@ public class PersonResourceTest {
                 .then()
                 .statusCode(200)
                 .body("id",equalTo(p2.getId()));
+=======
+        given().when().get("/xxx").then().statusCode(200);
+    }
+
+    //This test assumes the database contains two rows
+    @Test
+    public void testDummyMsg() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/xxx/").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("msg", equalTo("Hello World"));
+    }
+
+    @Test
+    public void testCount() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/xxx/count").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("count", equalTo(2));
+>>>>>>> d1dc78caf6e152eee2a33021df97f71d8889899c
     }
 }

@@ -1,0 +1,24 @@
+### Get All Movies
+GET http://localhost:8080/devops_starter_war_exploded/api/movie/
+Accept: application/json
+
+### Get Movie
+GET http://localhost:8080/devops_starter_war_exploded/api/movie/1
+Accept: application/json
+
+### Create Movie
+POST http://localhost:8080/devops_starter_war_exploded/api/movie
+Content-Type: application/json
+
+{"year": 1999, "title": "300"}
+
+### Update Movie
+PUT http://localhost:8080/devops_starter_war_exploded/api/movie/6
+Content-Type: application/json
+
+{"year": 2006, "title": "300"}
+
+### Delete Movie
+DELETE http://localhost:8080/devops_starter_war_exploded/api/movie/6
+Content-Type: application/json
+

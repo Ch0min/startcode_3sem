@@ -1,9 +1,8 @@
 package datafacades;
 
-import entities.Address;
+import dtos.PersonDTO;
 import entities.Person;
 
-import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,9 +13,7 @@ import javax.persistence.TypedQuery;
 import errorhandling.PersonNotFoundException;
 import utils.EMF_Creator;
 
-// LINK EXERCISE: https://docs.google.com/document/d/1-aFHS74YTg4xv6thEbpQPo0-LFw8c3YYBtuu9eRHayU/edit#
-
-public class PersonFacade implements IDataFacade<Person> {
+public class PersonFacade {
 
     private static PersonFacade instance;
     private static EntityManagerFactory emf;
@@ -37,9 +34,8 @@ public class PersonFacade implements IDataFacade<Person> {
         return emf.createEntityManager();
     }
 
-    @Override
-    public Person create(Person person) {
-        Person personEntity = new Person(person.getFname(), person.getLname(), person.getPhone());
+    public PersonDTO create(PersonDTO personDTO) {
+        Person personEntity = new Person(personDTO.getName(), personDTO.getAge());
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -48,85 +44,46 @@ public class PersonFacade implements IDataFacade<Person> {
         } finally {
             em.close();
         }
-        return personEntity;
+        return new PersonDTO(personEntity);
     }
 
-    @Override
-    public Person update(Person person) {
+    public PersonDTO update(PersonDTO personDTO) {
         EntityManager em = getEntityManager();
-        if (person.getId() == 0)
-            throw new EntityNotFoundException("No such Person with id: " + person.getId());
-        em.getTransaction().begin();
-        Person p = em.merge(person);
-        em.getTransaction().commit();
-        return p;
+        Person fromDB = em.find(Person.class, personDTO.getId());
+        if (fromDB == null)
+            throw new EntityNotFoundException("No such Person with id: " + personDTO.getId());
+
+        Person personEntity = new Person(personDTO.getId(), personDTO.getName(), personDTO.getAge());
+        try {
+            em.getTransaction().begin();
+            em.merge(personEntity);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO(personEntity);
     }
 
-    @Override
-    public Person getById(int id) throws EntityNotFoundException {
+    public PersonDTO getById(long id) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         Person person = em.find(Person.class, id);
         if (person == null)
-            throw new EntityNotFoundException("The Person entity with ID: " + id + " Was not found");
-        return person;
+            throw new PersonNotFoundException("The Person entity with ID: "+id+" Was not found");
+        return new PersonDTO(person);
     }
 
-    public List<Person> getAll() {
+    public List<PersonDTO> getAll() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
         List<Person> persons = query.getResultList();
-        return persons;
+        return PersonDTO.getDtos(persons);
     }
 
-    public Person delete(int id) throws EntityNotFoundException {
-        EntityManager em = emf.createEntityManager();
-        Person person = em.find(Person.class, id);
-        if (person == null) {
-            throw new EntityNotFoundException("No such Person exist with the id " + id);
-        }
-        try {
-            em.getTransaction().begin();
-            em.remove(person);
-            em.getTransaction().commit();
-            return person;
-        } finally {
-            em.close();
-        }
-    }
-
-    public Address create(Address address) {
-        Address addressEntity = new Address(address.getStreet(), address.getCity(), address.getZip());
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(addressEntity);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-        return addressEntity;
-    }
-
-/* ***     ONE TO ONE      *** -change: Person, Address, PersonDTO, PersonFacade */
-    public Person assignAddressToPerson(int addressId, int personId) {
-        EntityManager em = emf.createEntityManager();
-        Address address = em.find(Address.class, addressId);
-        Person person = em.find(Person.class, personId);
-        em.getTransaction().begin();
-        person.setAddress(address);
-        em.getTransaction().commit();
-        em.close();
-        return person;
-
-    }
-
-
-    public static void main(String[] args) throws PersonNotFoundException {
+    public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade pf = getPersonFacade(emf);
-//        pf.getAllPersons().forEach(dto -> System.out.println(dto));
-//        System.out.println(pf.getPerson(1));
-//        pf.editPerson(new PersonDTO(4, "Fido", "Le", "81723645"));
+//        pf.getAll().forEach(dto -> System.out.println(dto));
+        pf.update(new PersonDTO(6, "Fido", 3));
     }
 
 }

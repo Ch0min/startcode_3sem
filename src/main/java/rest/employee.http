@@ -1,0 +1,15 @@
+### Get all employees
+GET http://localhost:8080/devops_starter_war_exploded/api/employee/all
+Accept: application/json
+
+### Get employee ID
+GET http://localhost:8080/devops_starter_war_exploded/api/employee/id
+Accept: application/json
+
+### Get employee highest paid
+GET http://localhost:8080/devops_starter_war_exploded/api/employee/highestpaid
+Accept: application/json
+
+### Get employee ID
+GET http://localhost:8080/devops_starter_war_exploded/api/employee/name
+Accept: application/json
